@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 const tracks = [
   { number: "01", title: "Autonomic", time: "06:48" },
@@ -55,7 +56,7 @@ export default function Home() {
     <main>
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Vagus Records home">
-          <span className="monogram"><img src="/images/vagus-geometric-logo.png" alt="" /></span>
+          <span className="monogram"><Image src="/images/vagus-geometric-logo.png" alt="" width={42} height={42} priority /></span>
           <span>VAGUS RECORDS</span>
         </a>
         <button className="menu-toggle" aria-expanded={menuOpen} aria-label="Toggle navigation" onClick={() => setMenuOpen(!menuOpen)}>
@@ -64,12 +65,11 @@ export default function Home() {
         <nav className={menuOpen ? "open" : ""} aria-label="Main navigation">
           <a href="#releases" onClick={() => setMenuOpen(false)}>Releases</a>
           <a href="#artists" onClick={() => setMenuOpen(false)}>Artists</a>
-          <a href="#events" onClick={() => setMenuOpen(false)}>Events</a>
-          <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
+          <a href="/listen" onClick={() => setMenuOpen(false)}>Listen</a>
+          <a href="/about" onClick={() => setMenuOpen(false)}>About</a>
+          <a href="/submit" onClick={() => setMenuOpen(false)}>Submit</a>
         </nav>
-        <button className="header-play" aria-label={playing ? "Pause music" : "Play music"} onClick={() => setPlaying(!playing)}>
-          {playing ? <span className="pause-icon">Ⅱ</span> : <span className="play-icon">▶</span>}
-        </button>
+        <a className="header-play" href="/listen" aria-label="Open the listening room"><span className="play-icon">▶</span></a>
       </header>
 
       <section className="hero" id="top">
@@ -83,7 +83,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="nerve-art" aria-hidden="true"><img src="/images/vagus-brainwave-hero.png" alt="" /></div>
+        <div className="nerve-art" aria-hidden="true"><Image src="/images/vagus-brainwave-hero.png" alt="" fill priority sizes="100vw" /></div>
         <div className="hero-wave"><SignalMark /></div>
         <div className="scroll-note">SCROLL TO CONNECT <span>↓</span></div>
       </section>
@@ -93,7 +93,7 @@ export default function Home() {
         <div className="release-grid">
           <div className="cover-wrap">
             <div className="cover">
-              <img src="/images/autonomic-cover.png" alt="Autonomic by Mira Sol album artwork" />
+              <Image src="/images/autonomic-cover.png" alt="Autonomic by Mira Sol album artwork" fill sizes="(max-width: 900px) 80vw, 182px" />
               <span className="cover-label">VAGUS RECORDS</span>
               <span className="cover-code">012</span>
             </div>
@@ -134,7 +134,7 @@ export default function Home() {
           {artists.map((artist, index) => (
             <article className="artist-card" key={artist.name}>
               <a className="artist-portrait" href={artist.href} target="_blank" rel="noreferrer" aria-label={`Listen to ${artist.name} on SoundCloud`}>
-                <img src={artist.image} alt={`${artist.name}, Vagus Records artist`} />
+                <Image src={artist.image} alt={`${artist.name}, Vagus Records artist`} fill sizes="(max-width: 900px) 88vw, 24vw" />
                 <span className="artist-location">{artist.location}</span>
               </a>
               <div className="artist-meta">
@@ -162,14 +162,21 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="portal-band" aria-label="Explore Vagus Records">
+        <a href="/listen"><span>01</span><div><small>Listening room</small><h3>Enter the frequency</h3></div><b>↗</b></a>
+        <a href="/about"><span>02</span><div><small>Philosophy</small><h3>Follow the nerve</h3></div><b>↗</b></a>
+        <a href="/submit"><span>03</span><div><small>Demo portal</small><h3>Send a signal</h3></div><b>↗</b></a>
+        <a href="/contact"><span>04</span><div><small>Open channel</small><h3>Make contact</h3></div><b>↗</b></a>
+      </section>
+
       <section className="manifesto" id="about">
         <p>THE BODY LISTENS BEFORE THE MIND KNOWS.</p>
         <h2>Sound travels through us.<br />We release what <em>stays.</em></h2>
-        <a className="button primary" href="mailto:signals@vagusrecords.com">Send a signal <span>↗</span></a>
+        <a className="button primary" href="/about">Enter the story <span>↗</span></a>
       </section>
 
       <footer>
-        <a className="brand" href="#top"><span className="monogram"><img src="/images/vagus-geometric-logo.png" alt="" /></span><span>VAGUS RECORDS</span></a>
+        <a className="brand" href="#top"><span className="monogram"><Image src="/images/vagus-geometric-logo.png" alt="" width={42} height={42} /></span><span>VAGUS RECORDS</span></a>
         <p>Melodic house & techno<br />Berlin · Since 2024</p>
         <div className="socials" aria-label="Vagus Records social links">
           <a href="https://www.instagram.com/vagusrecords" target="_blank" rel="noreferrer">Instagram</a>
